@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurboWarp Mod Loader</title>
+    <script src="https://turbowarp.org/embed.js"></script>
+    <script src="modLoader.js"></script>
+</head>
+<body>
+    <h1>TurboWarp Mod Loader Example</h1>
+    <button id="loadMod">Load Mod</button>
+    <input type="file" id="modFile" accept=".js">
+    <script>
+        document.getElementById('loadMod').addEventListener('click', () => {
+            const fileInput = document.getElementById('modFile');
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const modContent = event.target.result;
+                    const script = document.createElement('script');
+                    script.innerHTML = modContent;
+                    document.head.appendChild(script);
+                };
+                reader.readAsText(file);
+            } else {
+                alert('Please select a mod file.');
+            }
+        });
+    </script>
+</body>
+</html>
